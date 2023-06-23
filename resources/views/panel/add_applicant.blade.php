@@ -17,21 +17,21 @@
 
               <div class="form-group">
                 <label for="exampleInputUsername1">FirstName</label>
-                <input type="text" class="form-control" name="FirstName"  value="{{isset($data->FirstName) ? $data->FirstName : ''}}" placeholder="First Name">
+                <input type="text" class="form-control" name="FirstName" value="{{isset($data->FirstName) ? $data->FirstName : ''}}" placeholder="First Name">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">SecondName</label>
-                <input type="text" class="form-control" name="SecondName"  value="{{isset($data->SecondName) ? $data->SecondName : ''}}" placeholder="Second Name">
+                <input type="text" class="form-control" name="SecondName" value="{{isset($data->SecondName) ? $data->SecondName : ''}}" placeholder="Second Name">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Surname</label>
-                <input type="text" class="form-control" name="Surname"  value="{{isset($data->Surname) ? $data->Surname : ''}}" placeholder="Surname">
+                <input type="text" class="form-control" name="Surname" value="{{isset($data->Surname) ? $data->Surname : ''}}" placeholder="Surname">
 
               </div>
               <div class="form-group">
                 <label for="exampleInputConfirmPassword1">Gender</label>
                 <select class="form-control w-100" id="Gender" name="Gender">
-                  <option value="" disabled >Select Gender</option>
+                  <option value="" disabled>Select Gender</option>
                   <option value="male" {{isset($data->Gender) && $data->Gender == 'male' ? "selected" : ''}}>Male</option>
                   <option value="female" {{isset($data->Gender) && $data->Gender == 'female' ? "selected" : ''}}>Female</option>
 
@@ -39,19 +39,19 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputConfirmPassword1">ID Number</label>
-                <input type="text" class="form-control" name="IDNumber"  value="{{isset($data->IDNumber) ? $data->IDNumber : ''}}" placeholder="ID Number">
+                <input type="text" class="form-control" name="IDNumber" value="{{isset($data->IDNumber) ? $data->IDNumber : ''}}" placeholder="ID Number">
               </div>
               <div class="form-group">
                 <label for="exampleInputConfirmPassword1">Date Of Birth</label>
-                <input type="date" class="form-control" name="dob"  value="{{isset($data->dob) ? $data->dob : ''}}" placeholder="Date Of Birth">
+                <input type="date" class="form-control" name="dob" value="{{isset($data->dob) ? $data->dob : ''}}" placeholder="Date Of Birth">
               </div>
 
               <div class="form-group">
                 <div style="display: flex;align-items: center;justify-content: space-between;">
                   <label for="exampleInputConfirmPassword1">Merital Status</label>
                   <div style="display: flex;align-items: center;gap: 10px;">
-                    <input type="radio" class="form-control" name="merital_status" value="yes" {{isset($data->merital_status) && $data->merital_status == 'yes' ? "checked" : ''}} > Yes </input>
-                    <input type="radio" class="form-control" name="merital_status" {{isset($data->merital_status) && $data->merital_status == 'no' ? "checked" : ''}}  value="no"> No</input>
+                    <input type="radio" class="form-control" name="merital_status" value="yes" {{isset($data->merital_status) && $data->merital_status == 'yes' ? "checked" : ''}}> Yes </input>
+                    <input type="radio" class="form-control" name="merital_status" {{isset($data->merital_status) && $data->merital_status == 'no' ? "checked" : ''}} value="no"> No</input>
                   </div>
                 </div>
               </div>
@@ -60,18 +60,18 @@
                 <div style="display: flex;align-items: center;justify-content: space-between;">
                   <label for="exampleInputConfirmPassword1">Is the applicant the head of the household ?</label>
                   <div style="display: flex;align-items: center;gap: 10px;">
-                    <input type="radio" class="form-control" id="is_house_hold_yes" name="is_house_hold" value="yes" {{isset($data->is_house_hold) && $data->is_house_hold == 'yes' ? "checked" : ''}} > Yes </input>
-                    <input type="radio" class="form-control" id="is_house_hold_no" name="is_house_hold" value="no" {{isset($data->is_house_hold) && $data->is_house_hold == 'no' ? "checked" : ''}}  > No</input>
+                    <input type="radio" class="form-control" id="is_house_hold_yes" name="is_house_hold" value="yes" {{isset($data->is_house_hold) && $data->is_house_hold == 'yes' ? "checked" : ''}}> Yes </input>
+                    <input type="radio" class="form-control" id="is_house_hold_no" name="is_house_hold" value="no" {{isset($data->is_house_hold) && $data->is_house_hold == 'no' ? "checked" : ''}}> No</input>
                   </div>
                 </div>
               </div>
-            @php
-            $is_h_s = isset($data->is_house_hold) && $data->is_house_hold == 'no' ? 'block' : 'none';
-            @endphp
-              <div id="household_data" style="display: <?php echo $is_h_s;?>">
+              @php
+              $is_h_s = isset($data->is_house_hold) && $data->is_house_hold == 'no' ? 'block' : 'none';
+              @endphp
+              <div id="household_data" style="display: <?php echo $is_h_s; ?>">
                 <div class="form-group">
                   <label for="exampleInputConfirmPassword1">Household First Name</label>
-                  <input type="text" class="form-control" name="household_first_name"  value="{{isset($data->household_first_name) ? $data->household_first_name : ''}}" placeholder="Household First Name">
+                  <input type="text" class="form-control" name="household_first_name" value="{{isset($data->household_first_name) ? $data->household_first_name : ''}}" placeholder="Household First Name">
                 </div>
 
                 <div class="form-group">
@@ -89,17 +89,17 @@
                 <div style="display: flex;align-items: center;justify-content: space-between;">
                   <label for="exampleInputConfirmPassword1">Does the household head have dependant ?</label>
                   <div style="display: flex;align-items: center;gap: 10px;">
-                    <input type="radio" class="form-control" id="is_dependant_yes"  {{isset($data->is_dependant) && $data->is_dependant == 'yes' ? "checked" : ''}}  name="is_dependant" value="yes"> Yes </input>
-                    <input type="radio" class="form-control" id="is_dependant_no" {{isset($data->is_dependant) && $data->is_dependant == 'no' ? "checked" : ''}}  name="is_dependant" value="no"> No</input>
+                    <input type="radio" class="form-control" id="is_dependant_yes" {{isset($data->is_dependant) && $data->is_dependant == 'yes' ? "checked" : ''}} name="is_dependant" value="yes"> Yes </input>
+                    <input type="radio" class="form-control" id="is_dependant_no" {{isset($data->is_dependant) && $data->is_dependant == 'no' ? "checked" : ''}} name="is_dependant" value="no"> No</input>
                   </div>
                 </div>
               </div>
 
               @php
-             $is_d_s = isset($data->is_dependant) && $data->is_dependant == 'no' ? 'none' : 'block';
-            @endphp
+              $is_d_s = isset($data->is_dependant) && $data->is_dependant == 'yes' ? 'block' : 'none';
+              @endphp
 
-              <div id="dependant_data" style="display: <?php echo $is_d_s;?>">
+              <div id="dependant_data" style="display: <?php echo $is_d_s; ?>">
                 <div class="form-group">
                   <label for="exampleInputConfirmPassword1">Dependant First Name</label>
                   <input type="text" class="form-control" name="dependant_first_name" value="{{isset($data->dependant_first_name) ? $data->dependant_first_name : ''}}" placeholder="dependant First Name">
@@ -203,9 +203,24 @@
                 <label for="exampleInputUsername1">Documents Upload</label>
                 <input type="file" id="documnet" class="form-control" name="documnet[]" multiple>
               </div>
+              <?php
+              if (isset($images) && !empty($images)) { ?>
+                <ol>
+                  <?php foreach ($images as $img) { ?>
+                    <li><a target="_blank" href="{{asset('uploads/applicant/').'/'.$img['name']}}">{{$img['name']}}</a></li>
+                  <?php
+                  } ?>
+                </ol>
+
+              <?php }
+
+              ?>
+
+              <!-- <a target="_blank" href="{{asset('uploads/applicant/66665.pdf')}}">djjd</a> -->
             </div>
           </div>
         </div>
+
         <div class="col-md-6 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
@@ -213,18 +228,42 @@
               <div class="form-group">
 
                 <select class="js-example-basic-single form-control w-100" id="sourceOfIncom" name="sourceOfIncom">
-                  <option {{isset($data->sourceOfIncom) && $data->sourceOfIncom == 'salary' ? "selected" : ''}}  value="salary">Salary</option>
-                  <option {{isset($data->sourceOfIncom) && $data->sourceOfIncom == 'bussiness' ? "selected" : ''}}  value="bussiness">bussiness</option>
-                  <option {{isset($data->sourceOfIncom) && $data->sourceOfIncom == 'other' ? "selected" : ''}}  value="other">other</option>
+                  <option {{isset($data->sourceOfIncom) && $data->sourceOfIncom == 'salary' ? "selected" : ''}} value="salary">Salary</option>
+                  <option {{isset($data->sourceOfIncom) && $data->sourceOfIncom == 'bussiness' ? "selected" : ''}} value="bussiness">bussiness</option>
+                  <option {{isset($data->sourceOfIncom) && $data->sourceOfIncom == 'other' ? "selected" : ''}} value="other">other</option>
 
                 </select>
               </div>
               <div class="form-group">
                 <label>company/employer name</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control"  value="{{isset($data->employername) ? $data->employername : ''}}" name="employername" placeholder="employername">
+                  <input type="text" class="form-control" value="{{isset($data->employername) ? $data->employername : ''}}" name="employername" placeholder="employername">
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-6 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Observation</h4>
+
+
+              <!-- <form action="{{url('upload_applicant')}}" method="post" class="forms-sample">
+              {!! Csrf_field() !!} -->
+              <div class="form-group">
+                <div style="display: flex;justify-content: space-between;align-items: center;">
+                  <label for="exampleInputUsername1">Flag suspicious application</label>
+                  <input style="width: 10%;" type="checkbox" class="form-control" id="flag" name="flag" value="flag" {{isset($data->flag) ? 'checked' : ''}}>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Comments</label>
+                <textarea id="Comments" name="Comments" class="form-control" rows="4" cols="50">{{isset($data->Comments) ? $data->Comments : ''}}</textarea>
+              </div>
+
             </div>
           </div>
         </div>
@@ -252,6 +291,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </form>
 

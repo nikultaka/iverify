@@ -1,5 +1,21 @@
 $(document).ready(function () {
 
+    $.validator.addMethod(
+        "validate_file_type",
+        function (val, elem) {
+            var files = $('#' + elem.id)[0].files;
+            for (var i = 0; i < files.length; i++) {
+                var fname = files[i].name.toLowerCase();
+                var re = /(\.pdf|\.png|\.jpeg|\.jpg)$/i;
+                if (!re.exec(fname)) {
+                    return false;
+                }
+            }
+            return true;
+        },
+        "Allowed Extentions are jpg , jpeg ,png , pdf"
+    );
+
     $('input[type=radio][name=is_house_hold]').on('change', function () {
         if ($(this).val() == 'no') {
             $("#household_data").css("display", 'block');
@@ -77,11 +93,21 @@ $(document).ready(function () {
             cellphone_number: "required",
             cellphone_number2: "required",
             work_tel_number: "required",
-            documnet: "required",
+            // documnet: "required",
+            'documnet[]': {
+                required: $("#h_id").val() ? false : true,
+                // extension: "jpg|jpeg|png|pdf"
+                validate_file_type: true
+
+            },
             sourceOfIncom: "required",
             employername: "required",
             department: "required",
             emplcontactn: "required",
+            // flag: "required",
+            Comments: "required",
+
+
 
         },
         messages: {
@@ -109,11 +135,18 @@ $(document).ready(function () {
             cellphone_number: "Please enter your Cellphone Number",
             cellphone_number2: "Please enter your Cellphone Number 2",
             work_tel_number: "Please enter your work Tel Number",
-            documnet: "Please upload your document",
+            // documnet: "Please upload your document",
+            'documnet[]': {
+                required: "Please upload atleast 1 File",
+                // extension: "Allowed Extentions are jpg , jpeg ,png , pdf "
+            },
             sourceOfIncom: "Please select source Of Incom",
             employername: "Please enter your employername",
             department: "Please enter your department",
             emplcontactn: "Please enter your employee Contect",
+            flag: "Please enter your employee Contect",
+            Comments: "Please enter Comments",
+
 
         },
 

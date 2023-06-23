@@ -12,9 +12,13 @@ class AdminController extends Controller
 {
    public function add_applicant($id = null)
    {
-      $data = Applicant::where('id',$id)->first();
-      
-      return view('panel.add_applicant')->with(compact('data'));
+      $data = null;
+      $images = [];
+      if ($id !== null) {
+         $data = Applicant::where('id', $id)->first();
+         $images = ApplicantImage::where('applicant_id', $id)->get()->toArray();
+      }
+      return view('panel.add_applicant')->with(compact('data', 'images'));
    }
    public function show_reg()
    {
@@ -66,6 +70,8 @@ class AdminController extends Controller
       // echo '<pre>';
       // print_r($request->FirstName);
       // die;
+     
+
       $res['status'] = 0;
       $res['message'] = "error";
       // $applicant = new applicant;
@@ -75,35 +81,39 @@ class AdminController extends Controller
       unset($data['h_id']);
       unset($data['documnet']);
       unset($data['_token']);
-      
-      if($h_id == ''){
-         $save = applicant::insertGetId($data);
-      }else{
-         if (!empty($documnet)) {
-            ApplicantImage::where('applicant_id',$h_id)->delete();
-         }
-         $update = applicant::where('id',$h_id)->update($data);
-         $save = $h_id;
 
+      if (!isset($data['flag'])) {
+         $data['flag'] = null;
       }
-      if($save){
-        $req['applicant_id'] = $save;
-        if (!empty($documnet)) {
-         
-            foreach ($documnet as $key => $file) {
-                $name = rand(1, 99999) . '.' . $file->getClientOriginalExtension();
-                if (!file_exists(public_path('uploads/applicant'))) {
-                  mkdir(public_path('uploads/applicant'), 0777, true);
-              }
-                $file->move(public_path('uploads/applicant'), $name);
-                $req["name"] = $name;
-                ApplicantImage::insert($req);
-            }
-        }
-        $res['status'] = 1;
-        $res['message'] = "success";
-        
+      // echo '<pre>';
+      // print_r($data);
+      // die;
 
+      if ($h_id == '') {
+         $save = applicant::insertGetId($data);
+      } else {
+         if (!empty($documnet)) {
+            ApplicantImage::where('applicant_id', $h_id)->delete();
+         }
+         $update = applicant::where('id', $h_id)->update($data);
+         $save = $h_id;
+      }
+      if ($save) {
+         $req['applicant_id'] = $save;
+         if (!empty($documnet)) {
+
+            foreach ($documnet as $key => $file) {
+               $name = rand(1, 99999) . '.' . $file->getClientOriginalExtension();
+               if (!file_exists(public_path('uploads/applicant'))) {
+                  mkdir(public_path('uploads/applicant'), 0777, true);
+               }
+               $file->move(public_path('uploads/applicant'), $name);
+               $req["name"] = $name;
+               ApplicantImage::insert($req);
+            }
+         }
+         $res['status'] = 1;
+         $res['message'] = "success";
       }
 
       echo json_encode($res);

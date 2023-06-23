@@ -34,8 +34,8 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo.svg" alt="logo" /></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
+        <a class="navbar-brand brand-logo" href="index.html"><img src="{{asset('themes/template/images/logo.svg')}}" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{asset('themes/template/images/logo-mini.svg')}}" alt="logo" /></a>
         <button class="navbar-toggler navbar-toggler align-self-center d-none d-lg-flex" type="button" data-toggle="minimize">
           <span class="typcn typcn-th-menu"></span>
         </button>
@@ -151,7 +151,7 @@
                 <i class="typcn typcn-cog text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" style="cursor: pointer;" href="{{ URL::route('user.logout') }}">
                 <i class="typcn typcn-power text-primary"></i>
                 Logout
               </a>
@@ -167,7 +167,7 @@
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_settings-panel.html -->
       <div class="theme-setting-wrapper">
-        <div id="settings-trigger"><i class="typcn typcn-cog-outline"></i></div>
+        <!-- <div id="settings-trigger"><i class="typcn typcn-cog-outline"></i></div> -->
         <div id="theme-settings" class="settings-panel">
           <i class="settings-close typcn typcn-delete-outline"></i>
           <p class="settings-heading">SIDEBAR SKINS</p>
@@ -198,6 +198,8 @@
       <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
       <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" defer></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" defer></script>
+      <script src="https://cdn.jsdelivr.net/jquery.validation/1.13.1/additional-methods.js" defer></script>
+
       <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}" />
 
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
