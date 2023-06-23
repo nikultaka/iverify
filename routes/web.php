@@ -31,14 +31,13 @@ Route::group(['middleware' => ['guest']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/', [HomeController::class, 'index']);
 
 
     Route::get('/login_page', [HomeController::class, 'login_page']);
     Route::get('/add_applicant/{id?}', [AdminController::class, 'add_applicant']);
 
-    Route::get('/show_applicant', [AdminController::class, 'show_applicant']);
+    Route::any('/show_applicant', [AdminController::class, 'show_applicant']);
 
     Route::get('/show_reg', [AdminController::class, 'show_reg']);
     // Route::get('/add_user',[AdminController::class,'add_user']);
@@ -46,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/show_stats', [AdminController::class, 'show_stats']);
     Route::get('/updateApplicant/{id}', [AdminController::class, 'updateApplicant']);
 
-    Route::get('/deleteApplicant/{id}', [AdminController::class, 'deleteApplicant']);
+    Route::post('/deleteApplicant', [AdminController::class, 'deleteApplicant']);
 
     Route::post('/upload_applicant', [AdminController::class, 'upload_applicant']);
 

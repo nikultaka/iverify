@@ -42,7 +42,7 @@
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <ul class="navbar-nav mr-lg-2">
-          <li class="nav-item  d-none d-lg-flex">
+          <!-- <li class="nav-item  d-none d-lg-flex">
             <a class="nav-link" href="#">
               Calendar
             </a>
@@ -140,7 +140,7 @@
                 </div>
               </a>
             </div>
-          </li>
+          </li> -->
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle  pl-0 pr-0" href="#" data-toggle="dropdown" id="profileDropdown">
               <i class="typcn typcn-user-outline mr-0"></i>

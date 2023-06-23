@@ -1,5 +1,6 @@
 $(document).ready(function () {
-
+    applicantList()
+    let search = ''
     $.validator.addMethod(
         "validate_file_type",
         function (val, elem) {
@@ -178,5 +179,76 @@ $(document).ready(function () {
 
         }
     });
+    var table = $('#applicantTable').DataTable();
+
+    $("input[type=search]").keyup(function () {
+        if (!table.data().any()) {
+            search = $(this).val()
+        }
+    });
+
+    $('#add_applicant').on('click', function () {
+        if (search) {
+
+            window.location.replace('/add_applicant?search=' + search);
+        } else {
+            window.location.replace('/add_applicant');
+        }
+    })
 
 });
+
+function applicantList() {
+
+    $("#applicantTable").DataTable({
+        processing: true,
+        "bDestroy": true,
+        "bAutoWidth": false,
+        serverSide: true,
+        ajax: {
+            type: "POST",
+            url: 'show_applicant',
+            data: {
+                "_token": $('meta[name="csrf-token"]').attr('content'),
+            }
+        },
+        columns: [
+            { data: "FirstName", name: "FirstName" },
+            { data: "SecondName", name: "SecondName" },
+            { data: "Surname", name: "Surname" },
+            { data: "IDNumber", name: "IDNumber" },
+            { data: "action", name: "action" },
+        ],
+        columnDefs: [
+            {
+                // targets: [4],
+                // orderable: false,
+                // defaultContent: "-",
+                // targets: "_all"
+
+            },
+        ],
+    });
+}
+
+function deleteApplicant(id) {
+    $.ajax({
+        url: "deleteApplicant",
+        type: "POST",
+        data: {
+            "_token": $('meta[name="csrf-token"]').attr('content'),
+            id: id
+        },
+        success: function (response) {
+            var data = JSON.parse(response);
+            if (data.status == 1) {
+                applicantList()
+                successMsg(data.message);
+                hideloader();
+            } else {
+                hideloader();
+                errorMsg(data.message);
+            }
+        },
+    });
+}

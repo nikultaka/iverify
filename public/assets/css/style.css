@@ -12,3 +12,11 @@
   z-index: 999999999;
   background: url('../images/loader.gif') 50% 50% no-repeat rgb(249, 249, 249);
 }
+
+/* #merital_status-error,
+#is_house_hold-error,
+#is_dependant-error {
+  position: absolute !important;
+  left: 5% !important;
+  margin-top: 10% !important;
+} */

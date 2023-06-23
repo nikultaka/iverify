@@ -6,18 +6,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Applicant;
 use App\Models\ApplicantImage;
+use App\Models\User;
 use Carbon\Carbon;
+use Yajra\Datatables\Datatables;
+use stdClass;
+
 
 class AdminController extends Controller
 {
-   public function add_applicant($id = null)
+   public function add_applicant(Request $request, $id = null)
    {
       $data = null;
+      $search = '';
       $images = [];
       if ($id !== null) {
          $data = Applicant::where('id', $id)->first();
          $images = ApplicantImage::where('applicant_id', $id)->get()->toArray();
       }
+      $search =  $request->input('search');
+      if (isset($search) && $search !== '') {
+         $data = new stdClass();
+         $data->IDNumber =  $search;
+      }
+
+
       return view('panel.add_applicant')->with(compact('data', 'images'));
    }
    public function show_reg()
@@ -31,17 +43,44 @@ class AdminController extends Controller
    }
    public function home()
    {
-      return view('panel.home');
+      $totalUser = User::count();
+      $totalApplicant = Applicant::count();
+      $recentUsers = User::latest()->take(5)->get()->toArray();
+      $recentApplicant = Applicant::latest()->take(5)->get()->toArray();
+
+      return view('panel.home')->with(compact('totalUser', 'totalApplicant', 'recentUsers', 'recentApplicant'));
    }
 
    public function logout()
    {
       return view('auth.login');
    }
-   public function show_applicant()
+   public function show_applicant(Request $request)
    {
-      $applicant = applicant::all();
-      return view('panel.show_applicant', compact('applicant'));
+      if (!$request->isMethod('post')) {
+
+         return view('panel.show_applicant');
+      }
+
+      if ($request->ajax() && $request->isMethod('post')) {
+
+         $applicant = applicant::select('*')
+            ->get()->toArray();
+
+         return DataTables::of($applicant)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+
+               $action =  '<a href="' . url("/add_applicant", $row['id']) . '" title="View Student"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Edit</button></a>';
+
+               $action .= '<button  onclick="deleteApplicant(' . $row['id'] . ')" class=" ml-2 btn btn-primary btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Delete</button>';
+
+               return $action;
+            })
+
+            ->rawColumns(['action'])
+            ->make(true);
+      }
    }
    public function show_charts()
    {
@@ -58,19 +97,37 @@ class AdminController extends Controller
       $applicant = applicant::find($id);
       return view('admin.editApplicant', compact('applicant'));
    }
-   public function deleteApplicant($id)
-   {
-      $applicant = applicant::find($id);
-      $applicant->delete();
+   // public function deleteApplicant($id)
+   // {
+   //    $applicant = applicant::find($id);
+   //    $applicant->delete();
 
-      return redirect()->back();
+   //    return redirect()->back();
+   // }
+
+   public function deleteApplicant(Request $request)
+   {
+      $response['status'] = 0;
+      $response['message'] = 'Oops! Applicant Not Deleted';
+
+      $delete_id = $request->input('id');
+
+      if ($delete_id != "" && $delete_id != null) {
+         $delete = Applicant::where('id', $delete_id)->delete();
+         if ($delete) {
+            $response['status'] = 1;
+            $response['message'] = "Applicant deleted successfully.";
+         }
+      }
+      echo json_encode($response);
+      exit();
    }
    public function upload_applicant(Request $request)
    {
       // echo '<pre>';
       // print_r($request->FirstName);
       // die;
-     
+
 
       $res['status'] = 0;
       $res['message'] = "error";

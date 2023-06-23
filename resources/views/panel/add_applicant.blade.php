@@ -39,7 +39,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputConfirmPassword1">ID Number</label>
-                <input type="text" class="form-control" name="IDNumber" value="{{isset($data->IDNumber) ? $data->IDNumber : ''}}" placeholder="ID Number">
+                <input type="text" class="form-control" id="IDNumber" name="IDNumber" value="{{isset($data->IDNumber) ? $data->IDNumber : ''}}" placeholder="ID Number">
               </div>
               <div class="form-group">
                 <label for="exampleInputConfirmPassword1">Date Of Birth</label>
@@ -54,6 +54,7 @@
                     <input type="radio" class="form-control" name="merital_status" {{isset($data->merital_status) && $data->merital_status == 'no' ? "checked" : ''}} value="no"> No</input>
                   </div>
                 </div>
+                <label id="merital_status-error" class="error" for="merital_status"></label>
               </div>
 
               <div class="form-group">
@@ -64,6 +65,7 @@
                     <input type="radio" class="form-control" id="is_house_hold_no" name="is_house_hold" value="no" {{isset($data->is_house_hold) && $data->is_house_hold == 'no' ? "checked" : ''}}> No</input>
                   </div>
                 </div>
+                <label id="is_house_hold-error" class="error" for="is_house_hold"></label>
               </div>
               @php
               $is_h_s = isset($data->is_house_hold) && $data->is_house_hold == 'no' ? 'block' : 'none';
@@ -93,6 +95,7 @@
                     <input type="radio" class="form-control" id="is_dependant_no" {{isset($data->is_dependant) && $data->is_dependant == 'no' ? "checked" : ''}} name="is_dependant" value="no"> No</input>
                   </div>
                 </div>
+                <label id="is_dependant-error" class="error" for="is_dependant"></label>
               </div>
 
               @php
